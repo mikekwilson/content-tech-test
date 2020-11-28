@@ -1,0 +1,55 @@
+version: '3.4'
+
+networks:
+  dblx:
+
+services:
+  dblx_php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: dblx_php
+    image: com.dblx.test:local
+
+    volumes:
+      - ../app:/var/www/html:rw
+
+    ports:
+      - "9000:9000"
+
+    networks:
+      - dblx
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "3250:80"
+
+    volumes:
+      - ../app:/var/www/html:rw
+      - ../nginx/conf.d/:/etc/nginx/conf.d/
+
+    depends_on:
+      - mysql
+      - dblx_php
+
+    networks:
+      - dblx
+
+  mysql:
+    image: mysql:8.0.22
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "33250:3306"
+
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+
+    networks:
+      - dblx
