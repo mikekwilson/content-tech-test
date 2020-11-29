@@ -14,8 +14,16 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->id();
+          $table->string('name');
+          $table->string('keywords');
+          $table->unsignedBigInteger('content_type_id');
+          $table->foreign('content_type_id')
+                ->references('id')
+                ->on('content_types')
+                ->onDelete('restrict');
+          $table->timestamps();
+
         });
     }
 

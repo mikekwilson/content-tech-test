@@ -14,8 +14,10 @@ class CreateContentTypesTable extends Migration
     public function up()
     {
         Schema::create('content_types', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->id();
+          $table->string('name');
+          $table->timestamps();
+
         });
     }
 

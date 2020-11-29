@@ -5,7 +5,7 @@ NAME					:= com.dblx.test
 FILES 				:= -f docker/docker-compose.yml
 
 down:
-	docker-compose ${FILES} down
+	docker-compose ${FILES} down --volumes
 
 log logs:
 	docker-compose ${FILES} logs -f --tail 20
