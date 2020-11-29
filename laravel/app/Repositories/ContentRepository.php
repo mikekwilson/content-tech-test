@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Contracts\RepositoryInterface;
+use App\Contracts\ContentInterface;
 use App\Models\Content;
 use Illuminate\Database\Eloquent\Collection;
 
-class ContentRepository implements RepositoryInterface {
+class ContentRepository implements ContentInterface {
 
   protected $model;
 
