@@ -12,7 +12,7 @@ services:
     image: com.dblx.test:local
 
     volumes:
-      - ../app:/var/www/html:rw
+      - ../laravel:/var/www/html:rw
 
     ports:
       - "9000:9000"
@@ -27,7 +27,7 @@ services:
       - "3250:80"
 
     volumes:
-      - ../app:/var/www/html:rw
+      - ../laravel:/var/www/html:rw
       - ../nginx/conf.d/:/etc/nginx/conf.d/:rw
 
     depends_on:
